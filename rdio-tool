@@ -24,7 +24,13 @@ if os.path.exists(config_path):
   config = json.load(file(config_path))
 else:
   config = {'auth_state': {}}
-  
+
+if options.consumer_key is None:
+  config['consumer_key'] = os.environ["RDIO_API_KEY"]
+
+if options.consumer_secret is None:
+  config['consumer_secret'] = os.environ["RDIO_API_SHARED_SECRET"]
+
 if options.consumer_key is not None:
   config['consumer_key'] = options.consumer_key
 if options.consumer_secret is not None:
